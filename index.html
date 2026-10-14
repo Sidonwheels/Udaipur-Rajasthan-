@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Not the Desert You Know: sketchbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--pw:min(45vw,62vh);--ph:calc(var(--pw)*1.3333);--ink:#2a2832;--paper:#f2ead7;--teal:#333a26;--gold:#e0b24a;--hw:'Caveat','Bradley Hand','Segoe Script','Comic Sans MS',cursive;
+--grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 .38 0 0 0 0 .3 0 0 0 0 .2 0 0 0 .55 -.17'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;background:#2b2320;font-family:Georgia,serif;color:var(--ink)}
+body{background:radial-gradient(ellipse at 50% 40%,#4a3a31,#251d1a 75%)}
+.stage{position:fixed;inset:0;display:grid;place-items:center;perspective:2600px;touch-action:none}
+.book{width:calc(var(--pw)*2);height:var(--ph);position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.5,.05,.2,1)}
+.sheet{position:absolute;left:50%;top:0;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.5,.05,.2,1)}
+.sheet.dr{transition:none}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;box-shadow:0 .6vmin 2.4vmin #0006}
+.face.b{transform:rotateY(180deg)}
+.face.r{border-radius:0 .8vmin .8vmin 0}.face.b{border-radius:.8vmin 0 0 .8vmin}
+.pg{position:relative;width:100%;height:100%;container-type:inline-size;background:var(--grain),var(--paper);overflow:hidden}
+.r .pg::after,.l .pg::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4}
+.r .pg::after{background:linear-gradient(90deg,#0000002e,#0000 9%)}
+.l .pg::after{background:linear-gradient(270deg,#0000002e,#0000 9%)}
+.cn{position:absolute;bottom:0;width:9cqw;height:9cqw;z-index:6;cursor:grab;touch-action:none;transition:width .2s,height .2s}
+.cn:hover{width:13cqw;height:13cqw}
+.r .cn{right:0;background:linear-gradient(315deg,#0000 47%,#0003 50%,#e9ddc0 56%)}
+.l .cn{left:0;background:linear-gradient(45deg,#0000 47%,#0003 50%,#e9ddc0 56%)}
+.hw{font-family:var(--hw)}
+/* cover */
+.cover{background:var(--grain),var(--teal)}
+.cover::before{content:"";position:absolute;inset:3cqw;border:.6cqw dashed #e58a4d99;border-radius:1.5cqw}
+.band{position:absolute;right:11cqw;top:0;bottom:0;width:3.2cqw;background:#141414;box-shadow:0 0 1cqw #0008}
+.lb{position:absolute;left:9cqw;right:18cqw;top:13cqw;background:#fbf3e8;padding:2.5cqw;transform:rotate(-1.2deg);box-shadow:.4cqw .6cqw 1.2cqw #0006}
+.lb img{display:block;width:100%;mix-blend-mode:multiply}
+.cv{position:absolute;left:9cqw;right:18cqw;bottom:13cqw;margin:0;text-align:center;font:500 7cqw var(--hw);color:#f3d9b0}
+.tape{position:absolute;width:20cqw;height:7cqw;background:repeating-linear-gradient(45deg,#e0b24acc 0 1.6cqw,#f3d98ccc 1.6cqw 3.2cqw);box-shadow:0 .3cqw .6cqw #0003;mix-blend-mode:multiply}
+/* end paper, title, closing */
+.endp{background:var(--grain),#d8c496}
+.endp p{position:absolute;left:12cqw;right:12cqw;bottom:20cqw;font:500 6.5cqw var(--hw);border-top:.4cqw solid #2a283288;padding-top:2cqw;margin:0}
+.ttl{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 10cqw}
+.ttl h2{font:700 15cqw/.92 var(--hw);margin:0 0 5cqw}
+.ttl .s{font:500 7cqw var(--hw);margin:0}
+.ttl .d{font:700 8cqw var(--hw);margin:5cqw 0 0;color:#c9642c}
+.ttl .t{font:italic 3.2cqw Georgia,serif;margin:10cqw 0 0;opacity:.6}
+.ttl svg{width:46cqw;margin-bottom:6cqw}
+.back{background:var(--grain),var(--teal)}
+.back::before{content:"";position:absolute;inset:3cqw;border:.6cqw dashed #e58a4d99;border-radius:1.5cqw}
+/* left page */
+.lp{padding:7cqw 8cqw 0}
+.hd{position:relative;z-index:2;padding-right:22cqw;min-height:25cqw}
+.loc{font:600 5.5cqw 'Noto Serif Devanagari','Noto Sans',Georgia,serif;opacity:.75;min-height:0}
+.hd h2{font:700 10.5cqw/.95 var(--hw);margin:0}
+.hd p{font:500 5.2cqw var(--hw);margin:1.5cqw 0 0;opacity:.8}
+.stamp{position:absolute;right:6cqw;top:5cqw;width:17cqw;transform:rotate(4deg);filter:drop-shadow(.3cqw .4cqw .5cqw #0004)}
+.pol{position:relative;margin:2cqw auto 0;width:58cqw;background:#fffdf8;padding:3cqw 3cqw 0;transform:rotate(-2deg);box-shadow:.4cqw 1cqw 2.2cqw #0005}
+.pol img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#cfc8b6}
+.pol.land img{aspect-ratio:4/3}
+.pol figcaption{font:500 4.6cqw var(--hw);height:8cqw;display:flex;align-items:center;justify-content:center;opacity:.7}
+.pol .tape{top:-3.2cqw}.pol .t1{left:-6cqw;transform:rotate(-38deg)}.pol .t2{right:-6cqw;transform:rotate(36deg)}
+.cap{font:500 6cqw/1.12 var(--hw);margin:5cqw 4cqw 0;text-align:center}
+/* right page */
+.rp{padding:7cqw 8cqw 0;display:flex;flex-direction:column;align-items:center}
+.art{width:100%;transform:rotate(.8deg);box-shadow:.4cqw .8cqw 1.8cqw #0004;border:1.2cqw solid #fffdf8;background:#fffdf8;display:block}
+.rp .cap{margin-top:6cqw}
+.hint{position:fixed;bottom:1.6vh;left:0;right:0;text-align:center;font:500 18px var(--hw);color:#d9c9a8;opacity:.8;pointer-events:none}
+svg.defs{position:absolute;width:0;height:0}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<filter id="rg" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>
+<filter id="gr"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" seed="8"/><feColorMatrix values="0 0 0 0 .3 0 0 0 0 .24 0 0 0 0 .18 0 0 0 1.1 -.42"/></filter>
+</defs></svg>
+<div class="stage" id="stage"><div class="book" id="book"></div></div>
+<div class="hint">drag a page corner, or use the arrow keys, or swipe</div>
+<script>
+/* ---- content: add one object per photo to SPREADS ---- */
+const TRIP={name:'Not the Desert You Know',places:'Udaipur & Banswara, Rajasthan',dates:'20 – 22 August 2026'};
+const bal=(a,b)=>[...Array(12)].map((_,i)=>{const x=14+i*25,y=a+x*.12;return `M${x} ${y}V${y+b}`}).join('');
+const A=(i,l)=>`<svg class="art" viewBox="0 0 300 400" role="img" aria-label="${l}"><rect width="300" height="400" fill="#f1e8d2"/><g filter="url(#rg)">${i}</g><rect width="300" height="400" filter="url(#gr)"/></svg>`;
+const hm=(x,y,k,o)=>`<g transform="translate(${x} ${y}) scale(${k})"><path d="M-9 0Q-8-12 0-12Q8-12 9 0Z" fill="#3e3d2b"/><ellipse rx="17" ry="4" fill="#4a4a35"/><circle cy="10" r="8" fill="#8d5b45"/><path d="M-7 12Q0 24 7 12Q4 19 0 19Q-4 19-7 12Z" fill="#1b1514"/><path d="M-14 20H14L16 62H-16Z" fill="#26305c"/><path d="M-12 30H15M-13 44H15M-5 20V62M6 20V62" stroke="#3b4d8c" stroke-width="1.6"/>${o?'<path d="M-14 22L-48 26V32L-14 32ZM14 22L48 26V32L14 32Z" fill="#26305c"/>':'<path d="M-14 22L-22 58L-16 60L-10 30ZM14 22L22 58L16 60L10 30Z" fill="#26305c"/>'}<path d="M-16 62H16L18 112H4L0 82L-4 112H-18Z" fill="#33383a"/></g>`;
+const SPREADS=[{
+ photo:'photos/01.jpg',ar:'port',alt:'Man leaning on a blue rooftop railing above a lake',
+ local:'',name:'Old-City Rooftop',sub:'Udaipur, Rajasthan · first morning',
+ stamp:'UDAIPUR',date:'20 AUG',label:'photo 01 · 20 Aug',
+ caption:'Old-city rooftop in Udaipur, morning: the lake and Aravalli hills just beyond the railing.',
+ artCap:'Blue rails, grey lake, green hills.',
+ art:`<svg class="art" viewBox="0 0 300 400" role="img" aria-label="Marker drawing of a man at a blue railing with a lake and hills behind"><rect width="300" height="400" fill="#f1e8d2"/><g filter="url(#rg)">
+<rect width="300" height="152" fill="#cdd5d9"/><ellipse cx="70" cy="40" rx="62" ry="17" fill="#e5e9eb"/><ellipse cx="215" cy="62" rx="70" ry="19" fill="#e5e9eb"/><ellipse cx="130" cy="108" rx="80" ry="12" fill="#dfe4e7"/>
+<path d="M0 156L40 138Q90 122 140 142L200 140Q250 130 300 142V160H0Z" fill="#7f9788"/>
+<rect y="152" width="300" height="70" fill="#91a2aa"/><rect y="180" width="300" height="7" fill="#a9b7bc"/>
+<rect x="38" y="156" width="40" height="8" fill="#f2f0ea"/><rect x="50" y="150" width="14" height="6" fill="#f2f0ea"/>
+<rect x="112" y="146" width="52" height="30" fill="#ece6d8"/><rect x="164" y="138" width="62" height="38" fill="#e3b94f"/><path d="M172 150h8v10h-8zM188 150h8v10h-8zM204 150h8v10h-8z" fill="#9c7a2e"/>
+<path d="M200 186Q240 170 300 182V310H215Z" fill="#4e7a48"/><path d="M240 214Q270 200 300 212V310H250Z" fill="#3d6139"/>
+<path d="M0 262L118 232L160 310H0Z" fill="#b5533c"/><path d="M12 268L124 240M10 288L136 254M8 308L148 270" stroke="#8f3d2c" stroke-width="3"/>
+<rect y="330" width="300" height="70" fill="#d9d2c4"/><path d="M40 378l14-11 14 11-14 11zM120 384l14-11 14 11-14 11zM210 376l14-11 14 11-14 11z" fill="#5a79c0"/>
+<circle cx="116" cy="188" r="14" fill="#8d5b45"/><path d="M102 184Q104 168 118 170Q132 170 131 184Q120 177 102 184Z" fill="#1b1514"/><path d="M104 192Q116 214 130 192Q124 206 116 208Q108 206 104 192Z" fill="#1b1514"/>
+<path d="M92 214L140 214L158 258L86 262Z" fill="#26305c"/><path d="M96 226H148M92 244H154M104 214L96 260M122 214L121 260M140 214L148 258" stroke="#3b4d8c" stroke-width="2"/>
+<path d="M92 218L64 240L76 256L96 240Z" fill="#26305c"/><circle cx="72" cy="258" r="6" fill="#8d5b45"/><path d="M140 218L174 240L162 256L134 234Z" fill="#26305c"/><circle cx="165" cy="260" r="6" fill="#8d5b45"/>
+<path d="M86 258L158 254L170 400H130L126 330L100 400H80Z" fill="#1d1d20"/>
+<g fill="none" stroke="#1c2230" stroke-opacity=".38" stroke-width="1.6" stroke-linejoin="round"><circle cx="116" cy="188" r="14"/><path d="M92 214L140 214L158 258L86 262Z"/></g>
+<path d="${bal(240,84)}" stroke="#2c56b5" stroke-width="3.5" fill="none"/>
+<path d="M0 238L300 274V282L0 246ZM0 276L300 312V320L0 284ZM0 314L300 350V358L0 322Z" fill="#2c56b5"/></g>
+<rect width="300" height="400" filter="url(#gr)"/></svg>`
+},
+{photo:'photos/02.jpg',ar:'port',alt:'Man in a hat stepping down rocks above a green lake',local:'',name:'Bahubali Hills',sub:'Badi Lake, near Udaipur',stamp:'BAHUBALI',date:'20 AUG',label:'photo 02 · 20 Aug',caption:'Bahubali Hills: stepping down the rocks above Badi Lake, monsoon green all around.',artCap:'Rocks, a hat, and a lake below.',art:A(`<rect width="300" height="400" fill="#dde3e3"/><ellipse cx="80" cy="40" rx="70" ry="18" fill="#eef0ef"/><ellipse cx="230" cy="70" rx="60" ry="14" fill="#eef0ef"/><path d="M0 180L50 120L110 150L180 40L250 110L300 90V230H0Z" fill="#5f8a63"/><path d="M0 210L70 150L150 190L230 140L300 180V240H0Z" fill="#4a7650"/><path d="M0 215Q80 190 160 215T300 205V300H0Z" fill="#a3b4b0"/><path d="M20 250Q70 215 130 240L110 270H10Z" fill="#6b9468"/><path d="M0 310L60 280L150 290L240 262L300 280V400H0Z" fill="#c98f5a"/>${hm(145,160,1.35,0)}<path d="M30 345L110 315L190 335L300 305V400H20Z" fill="#a8683d"/><circle cx="60" cy="300" r="12" fill="#5f8a63"/><circle cx="252" cy="276" r="9" fill="#4a7650"/><path d="M198 296q7-11 14 0z" fill="#1b1514"/>`,'Marker drawing: Man in a hat stepping down rocks above a green lake')},
+{photo:'photos/03.jpg',ar:'port',alt:'Man with arms outstretched on a rocky ledge above a lake',local:'',name:'Bahubali Hills',sub:'arms out over the lake',stamp:'BAHUBALI',date:'20 AUG',label:'photo 03 · 20 Aug',caption:'Bahubali Hills: arms out over Badi Lake and the Aravalli ridges.',artCap:'Arms out, ridges rolling away.',art:A(`<rect width="300" height="400" fill="#cfd3d3"/><ellipse cx="80" cy="40" rx="70" ry="18" fill="#eef0ef"/><ellipse cx="230" cy="70" rx="60" ry="14" fill="#eef0ef"/><path d="M0 185L60 160L120 178L200 145L260 128L300 150V290H0Z" fill="#86a889"/><path d="M0 215L50 190L110 205L170 190L230 175L300 200V300H0Z" fill="#5c8460"/><path d="M0 250Q60 262 90 242T170 252Q150 284 80 292T0 302Z" fill="#8fa8a4"/><path d="M150 400L172 342L230 322L300 332V400Z" fill="#c98f5a"/><path d="M0 345L50 332L92 372L62 400H0Z" fill="#7f8a78"/><path d="M262 304l32-9v15z" fill="#9db0b8"/>${hm(156,228,1.05,1)}`,'Marker drawing: Man with arms outstretched on a rocky ledge above a lake')},
+{photo:'photos/04.jpg',ar:'port',alt:'Small figure with arms out, lake and green hills',local:'',name:'Bahubali Hills',sub:'the wide view',stamp:'BAHUBALI',date:'20 AUG',label:'photo 04 · 20 Aug',caption:'Same ledge, framed wider: the lake winding between green hills, not a dune in sight.',artCap:'Small man, big green country.',art:A(`<rect width="300" height="400" fill="#d4d8dc"/><ellipse cx="80" cy="40" rx="70" ry="18" fill="#eef0ef"/><ellipse cx="230" cy="70" rx="60" ry="14" fill="#eef0ef"/><path d="M0 275L60 250L110 266L180 244L240 256L300 240V345H0Z" fill="#5c8460"/><path d="M0 310L70 290L140 300L220 285L300 295V350H0Z" fill="#4a7650"/><path d="M0 335Q60 345 100 322Q135 352 80 372L0 382Z" fill="#8fa8a4"/><path d="M110 400L130 346L200 333L300 352V400Z" fill="#c98f5a"/><path d="M262 322l32-9v15z" fill="#9db0b8"/>${hm(150,262,.62,1)}`,'Marker drawing: Small figure with arms out, lake and green hills')},
+{photo:'photos/05.jpg',ar:'port',alt:'Man at a rooftop cafe table looking at the city',local:'',name:'Rooftop Coffee Stop',sub:'Udaipur · an evening pause',stamp:'UDAIPUR',date:'20 AUG',label:'photo 05 · 20 Aug',caption:'Coffee shop stop: a rooftop table with the old city hazy behind the glass.',artCap:'Coffee cooling, city hazy beyond the glass.',art:A(`<rect width="300" height="400" fill="#e5e8e8"/><ellipse cx="90" cy="70" rx="90" ry="26" fill="#f4f5f5"/><ellipse cx="230" cy="130" rx="80" ry="22" fill="#d3d8da"/><path d="M0 0H190L170 14H0Z" fill="#2c2b2e"/><rect x="14" y="14" width="5" height="250" fill="#8a8680"/><path d="M0 285V250H30V238H58V256H84V232H120V262H150V244H190V258H222V240H262V262H300V285Z" fill="#d3cbc0"/><path d="M40 285V256H66V285ZM150 285V258H176V285Z" fill="#c9533f"/><path d="M96 285V250H120V285ZM226 285V252H248V285Z" fill="#f1ede4"/><rect y="278" width="300" height="9" fill="#2d2a2c"/><path d="M120 332L300 318V400H110Z" fill="#a6693c"/><path d="M130 350L300 336M125 372L300 358" stroke="#7c4a28" stroke-width="3"/><rect x="190" y="346" width="32" height="16" fill="#efe9dd"/><ellipse cx="206" cy="346" rx="16" ry="6" fill="#efe9dd"/><ellipse cx="206" cy="346" rx="12" ry="4" fill="#4a2e22"/><ellipse cx="190" cy="390" rx="34" ry="8" fill="#2c2a2c"/><rect x="250" y="360" width="26" height="18" fill="#f6f4ee" transform="rotate(-12 263 369)"/><path d="M-10 400V300Q30 238 118 232Q190 236 230 300V400Z" fill="#26305c"/><path d="M0 300Q100 262 230 310M0 340Q110 300 235 350M0 380Q110 340 240 392M60 280L50 400M120 250L112 400M180 262L176 400" stroke="#3b4d8c" stroke-width="3" fill="none"/><circle cx="148" cy="196" r="26" fill="#1b1514"/><path d="M128 200Q124 222 140 226L150 205Z" fill="#8d5b45"/><path d="M124 208Q126 232 146 232L148 214Z" fill="#1b1514"/>`,'Marker drawing: Man at a rooftop cafe table looking at the city')}];
+/* ---- page builders ---- */
+const stamp=s=>`<svg class="stamp" viewBox="0 0 60 72"><rect x="2" y="2" width="56" height="68" fill="#f7edd2" stroke="#f2ead7" stroke-width="3.2" stroke-dasharray="0 5.2" stroke-linecap="round"/><rect x="7" y="7" width="46" height="46" fill="#3f6f8f"/><circle cx="36" cy="26" r="7" fill="#e0b24a"/><path d="M7 44Q20 30 32 42Q42 34 53 44V53H7Z" fill="#2d4f3a"/><text x="30" y="64" font-size="7.5" text-anchor="middle" fill="#7a2e2e" font-family="Georgia,serif" font-weight="700">${s.stamp}</text><g transform="rotate(-14 40 46)" fill="none" stroke="#7a2e2e" stroke-opacity=".6"><circle cx="40" cy="46" r="13"/><text x="40" y="47" font-size="5.2" text-anchor="middle" fill="#7a2e2e" stroke="none" font-family="Georgia,serif">${s.date}</text><path d="M24 40q8-4 16 0t16 0"/></g></svg>`;
+const left=s=>`<div class="pg lp"><div class="hd">${stamp(s)}<div class="loc">${s.local||''}</div><h2 class="hw">${s.name}</h2><p>${s.sub}</p></div><figure class="pol ${s.ar==='land'?'land':''}" style="margin-inline:auto"><i class="tape t1"></i><i class="tape t2"></i><img src="${s.photo}" alt="${s.alt}"><figcaption>${s.label}</figcaption></figure><p class="cap">${s.caption}</p></div>`;
+const right=s=>`<div class="pg rp">${s.art}<p class="cap">${s.artCap}</p></div>`;
+const sun=`<svg viewBox="0 0 200 110"><g fill="none" stroke="#e0b24a" stroke-width="3" stroke-linecap="round"><circle cx="100" cy="38" r="18"/><path d="M100 6v8M68 38h8M124 38h8M77 15l6 6M123 15l-6 6"/><path d="M10 100Q50 62 90 92Q130 56 190 100" /><path d="M20 108q20-6 40 0t40 0t40 0t40 0"/></g></svg>`;
+const PAGES=[
+ `<div class="pg cover"><div class="band"></div><div class="lb"><img src="logo.jpg" alt="Not the Desert You Know: a Rajasthan road trip series"><i class="tape" style="left:-7cqw;top:-2cqw;transform:rotate(-38deg)"></i><i class="tape" style="right:-7cqw;bottom:-2cqw;transform:rotate(-38deg)"></i></div><p class="cv">a sketchbook · ${TRIP.dates}</p></div>`,
+ `<div class="pg endp"><p>This sketchbook belongs to</p></div>`,
+ `<div class="pg ttl">${sun.replace(/#e0b24a/g,'#333a26')}<h2 class="hw">${TRIP.name}</h2><p class="s hw">${TRIP.places}</p><p class="d hw">${TRIP.dates}</p><p class="t">busting the myth that Rajasthan is only desert</p></div>`,
+ ...SPREADS.flatMap(s=>[left(s),right(s)]),
+ `<div class="pg ttl"><h2 class="hw" style="font-size:12cqw">Green side up</h2><p class="s hw">Lakes, hills and backwaters, all in Rajasthan.</p><p class="d hw">${TRIP.dates}</p><p class="t">Udaipur to Banswara. Thanks for flipping through.</p></div>`,
+ `<div class="pg back"></div>`,''];
+/* ---- book engine ---- */
+const book=document.getElementById('book'),N=PAGES.length/2;let cur=0,drag=null,swipe=null,zt;
+const S=[...Array(N)].map((_,k)=>{const s=document.createElement('div');s.className='sheet';
+ const cn=(d)=>`<i class="cn" data-k="${k}" data-d="${d}"></i>`;
+ s.innerHTML=`<div class="face r">${PAGES[2*k]}${PAGES[2*k]?cn('f'):''}</div><div class="face b l">${PAGES[2*k+1]}${PAGES[2*k+1]?cn('b'):''}</div>`;
+ book.appendChild(s);return s});
+function render(prev){S.forEach((s,i)=>{const f=i<cur;s.style.transform=`rotateY(${f?-180:0}deg)`;s.style.zIndex=(prev!=null&&(i<prev)!==f)?50:(f?i+1:N-i)});
+ book.style.transform=cur===0?'translateX(-25%)':'none';clearTimeout(zt);if(prev!=null)zt=setTimeout(()=>render(),1000)}
+const go=d=>{const p=cur;cur=Math.max(0,Math.min(N-1,cur+d));if(p!==cur)render(p)};
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+document.addEventListener('pointerdown',e=>{const c=e.target.closest('.cn');
+ if(!c){if(e.pointerType==='touch')swipe=e.clientX;return}
+ const k=+c.dataset.k,f=c.dataset.d==='f';if(f?k!==cur:k!==cur-1)return;
+ drag={k,f,t:null};S[k].classList.add('dr');e.preventDefault()});
+addEventListener('pointermove',e=>{if(!drag)return;const r=book.getBoundingClientRect(),w=r.width/2;
+ const t=Math.acos(Math.max(-1,Math.min(1,(e.clientX-(r.left+w))/w)))*180/Math.PI;drag.t=t;
+ S[drag.k].style.transform=`rotateY(${-t}deg)`;S[drag.k].style.zIndex=50});
+addEventListener('pointerup',e=>{if(swipe!==null){const dx=e.clientX-swipe;swipe=null;if(Math.abs(dx)>50)go(dx<0?1:-1)}
+ if(!drag)return;const{k,f,t}=drag,p=cur;S[k].classList.remove('dr');drag=null;
+ if(t===null||(f&&t>50)||(!f&&t<130))cur=f?k+1:k;render(p)});
+render();
+</script>
+</body>
+</html>
